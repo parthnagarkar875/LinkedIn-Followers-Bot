@@ -1,40 +1,30 @@
-import os
-import pickle
-import get_credentials
-from time import sleep
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Apr 15 04:17:20 2020
+
+@author: Parth
+"""
+
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from time import sleep, strftime
+from random import randint
+import pandas as pd
 
-if os.path.exists('credentials.pickle'):
-    with open('credentials.pickle','rb') as f:  
-        credentials = pickle.load(f)
-else:
-    get_credentials()
-    with open('credentials.pickle','rb') as f:  
-    	credentials = pickle.load(f)
-
-EXECUTABLE_PATH = credentials['EXECUTABLE_PATH']
-LINKEDIN_PATH = 'https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin'
-BROWSER = credentials['Browser']
-EMAIL_OR_PHONE_NO = credentials['Email_or_phone_no']
-PASSWORD = credentials['Password']
-
-print(credentials)
-
-if BROWSER == "Chrome":
-    webdriver = webdriver.Chrome(executable_path=EXECUTABLE_PATH)
-elif BROWSER == "Firefox":
-    webdriver = webdriver.Firefox(executable_path=EXECUTABLE_PATH)
-
-webdriver.get(LINKEDIN_PATH)
+chromedriver_path = 'C:/Users/Parth/Contacts/Downloads/chromedriver_win32/chromedriver.exe'
+#chromedriver_path = 'C:\Users\Parth\Contacts\Downloads\chromedriver_win32\chromedriver.exe' # Change this to your own chromedriver path!
+webdriver = webdriver.Chrome(executable_path=chromedriver_path)
+sleep(2)
+webdriver.get('https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin')
 sleep(3)
 
 # =============================================================================
 # Login
 # =============================================================================
-email_or_phone_no = webdriver.find_element_by_xpath('/html/body/div/main/div[2]/form/div[1]/input')
-email_or_phone_no.send_keys(EMAIL_OR_PHONE_NO) 
+username = webdriver.find_element_by_xpath('/html/body/div/main/div[2]/form/div[1]/input')
+username.send_keys('')  #specify username
 password = webdriver.find_element_by_xpath('/html/body/div/main/div[2]/form/div[2]/input')
-password.send_keys(PASSWORD)  
+password.send_keys('')  #specify password
 sleep(5)
 try:
     button_login = webdriver.find_element_by_xpath('/html/body/div/main/div[2]/form/div[3]/button')
@@ -59,6 +49,15 @@ sleep(4)
 # =============================================================================
 for i in range(1,1000):
     sleep(2)
-    connect.click("/html/body/div[4]/div/div/div[2]/ul/li[{i}]/div/section/div[2]/footer/button/span") 
+    one="/html/body/div[4]/div/div/div[2]/ul/li["
+    two="]/div/section/div[2]/footer/button/span"
+    total=one+str(i)+two
+    connect = webdriver.find_element_by_xpath(total)
+    connect.click() 
     if i%12==0:
         sleep(3)
+    
+
+
+
+
