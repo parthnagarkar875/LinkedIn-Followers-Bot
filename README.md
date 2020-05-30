@@ -21,7 +21,7 @@
 <ul>
 <li>Language: Python3</li>
 <li>Dependencies: Selenium Chromedriver</li>
-<li>Libraries: Available in <a href="https://github.com/VirtualGoat/LinkedIn-Followers-Bot/requirements.txt">requirements.txt</a>.</li>
+<li>Libraries: Available in <a href="https://github.com/VirtualGoat/LinkedIn-Followers-Bot/blob/master/requirements.txt">requirements.txt</a>.</li>
 </ul>
 <p></p>
 
