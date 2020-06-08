@@ -1,6 +1,6 @@
 import os
 import pickle
-import get_credentials
+from get_credentials import get_creds
 from time import sleep
 from selenium import webdriver
 
@@ -8,7 +8,7 @@ if os.path.exists('credentials.pickle'):
     with open('credentials.pickle','rb') as f:  
         credentials = pickle.load(f)
 else:
-    get_credentials()
+    get_creds()
     with open('credentials.pickle','rb') as f:  
     	credentials = pickle.load(f)
 
