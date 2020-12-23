@@ -62,3 +62,36 @@ for i in range(1,1000):
     connect.click("/html/body/div[4]/div/div/div[2]/ul/li[{i}]/div/section/div[2]/footer/button/span") 
     if i%12==0:
         sleep(3)
+        
+        
+# =============================================================================
+# Send connection requests to people associated with a keyword (Like, People Working in "Google", or Students from any College, ex. "IIMA")
+# =============================================================================        
+print("Enter any keyword to send connection Requests: ",end=" ")
+word = str(input())
+success = 0
+pagekey = 'https://www.linkedin.com/search/results/people/?keywords='+word+'&origin=SWITCH_SEARCH_VERTICAL&page='
+print("For keyword: "+word)
+for i in range(1,10):
+	page = pagekey+str(i)
+	webdriver.get(page)
+	sleep(2)
+	j = 1
+	k = 1
+	while j <= 10:	
+		if k == 1 and j>5:
+			webdriver.execute_script("window.scrollTo(0, 400)") 
+			sleep(1)
+			k = 0		
+		try:
+			webdriver.find_element_by_xpath('/html/body/div[8]/div[3]/div/div[2]/div/div[2]/div/div/div/div/ul/li['+str(j)+']/div/div/div[3]/div/button').click()
+			sleep(1)
+			webdriver.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]/span').click()
+			success += 1
+			sleep(2)
+		except:
+			pass
+		j += 1
+		sleep(2)
+	sleep(2)
+print("Sent: "+str(success))
